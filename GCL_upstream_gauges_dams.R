@@ -60,6 +60,7 @@ dams <- tibble(
   as_tibble() %>% 
   st_as_sf(sf_column_name = "geo_col", crs = 4326)
 
+tiff("GCD_CR_gauges.tiff", units = "in", width = 8, height = 6, res = 300)
 # plot
 ggplot() +
   geom_sf(
@@ -103,21 +104,20 @@ ggplot() +
     aes(label = Name),
     size = 1.5,
     nudge_y = 0.08,
-    nudge_x = 0.08,
     alpha = 0.8
   ) +
   geom_sf_label(
     data = dams[2,],
     aes(label = Name),
     size = 1.5,
-    nudge_x = -0.1,
+    nudge_x = -0.2,
     alpha = 0.8
   ) +
   geom_sf_label(
     data = dams[9,],
     aes(label = Name),
     size = 1.5,
-    nudge_x = -0.22,
+    nudge_x = -0.28,
     nudge_y = 0.02,
     alpha = 0.8
   ) +
@@ -148,3 +148,4 @@ ggplot() +
     title = "Grand Coulee Dam and Surrounding Area",
     subtitle = "Dams and USGS Stations"
   )
+dev.off()
