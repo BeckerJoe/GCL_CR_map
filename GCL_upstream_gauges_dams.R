@@ -13,7 +13,6 @@
 library(sf)
 library(ggplot2)
 library(dplyr)
-library(maps)
 
 # create a bounding box
 bbox = st_bbox(c(xmin = -115.0, xmax = -120.0, 
@@ -53,9 +52,9 @@ CB.states <- st_as_sf(st_transform(st_cast(states[states$NAME %in% state.names,]
 
 # get relevant dams
 dams <- tibble(
-  Name = c("Grand Coulee", "North Dam", "Dry Falls Dam", "Little Falls Dam", "Libby Dam", "Chief Joseph Dam", "Albeni Falls Dam", "Keenleyside Dam"), 
-  Lat = c(47.939706, 47.940842, 47.62, 47.831389, 48.41, 47.9961, 48.18000, 49.339444), 
-  Long = c(-119.001597, -119.017406, -119.3075, -117.916667, -115.314, -119.632, -116.99972, -117.771944)) %>%
+  Name = c("Grand Coulee", "North Dam", "Dry Falls Dam", "Little Falls Dam", "Libby Dam", "Chief Joseph Dam", "Albeni Falls Dam", "Keenleyside Dam", "Noxon Rapids Dam"), 
+  Lat = c(47.939706, 47.940842, 47.62, 47.831389, 48.41, 47.9961, 48.18000, 49.339444, 47.959722), 
+  Long = c(-119.001597, -119.017406, -119.3075, -117.916667, -115.314, -119.632, -116.99972, -117.771944, -115.733889)) %>%
   st_as_sf(coords = c("Long", "Lat")) %>% 
   rename(geo_col = geometry) %>%
   as_tibble() %>% 
@@ -93,7 +92,7 @@ ggplot() +
     alpha = 0.8
   ) +
   geom_sf_label(
-    data = dams[3:8,],
+    data = dams[3:9,],
     aes(label = Name),
     size = 1.5,
     nudge_y = 0.08,
