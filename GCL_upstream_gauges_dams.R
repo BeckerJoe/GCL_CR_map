@@ -92,7 +92,7 @@ ggplot() +
     alpha = 0.8
   ) +
   geom_sf_label(
-    data = dams[3:9,],
+    data = dams[3:8,],
     aes(label = Name),
     size = 1.5,
     nudge_y = 0.08,
@@ -111,6 +111,14 @@ ggplot() +
     aes(label = Name),
     size = 1.5,
     nudge_x = -0.1,
+    alpha = 0.8
+  ) +
+  geom_sf_label(
+    data = dams[9,],
+    aes(label = Name),
+    size = 1.5,
+    nudge_x = -0.22,
+    nudge_y = 0.02,
     alpha = 0.8
   ) +
   geom_sf_label(
