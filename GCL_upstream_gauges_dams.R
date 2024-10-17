@@ -147,5 +147,6 @@ ggplot() +
   labs(
     title = "Grand Coulee Dam and Surrounding Area",
     subtitle = "Dams and USGS Stations"
-  )
+  ) + 
+  coord_sf(expand = FALSE)
 dev.off()
