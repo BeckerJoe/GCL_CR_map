@@ -52,15 +52,15 @@ CB.states <- st_as_sf(st_transform(st_cast(states[states$NAME %in% state.names,]
 
 # get relevant dams
 dams <- tibble(
-  Name = c("Grand Coulee", "North Dam", "Dry Falls Dam", "Little Falls Dam", "Libby Dam", "Chief Joseph Dam", "Albeni Falls Dam", "Keenleyside Dam", "Noxon Rapids Dam"), 
-  Lat = c(47.939706, 47.940842, 47.62, 47.831389, 48.41, 47.9961, 48.18000, 49.339444, 47.959722), 
-  Long = c(-119.001597, -119.017406, -119.3075, -117.916667, -115.314, -119.632, -116.99972, -117.771944, -115.733889)) %>%
+  Name = c("Grand Coulee", "North Dam", "Dry Falls Dam", "Little Falls Dam", "Libby Dam", "Chief Joseph Dam", "Albeni Falls Dam", "Keenleyside Dam", "Noxon Rapids Dam", "Long Lake Dam", "Nine Mile Dam", "Waneta Dam", "Seven Mile Dam", "Boundary Dam"), 
+  Lat = c(47.939706, 47.940842, 47.62, 47.831389, 48.41, 47.9961, 48.18000, 49.339444, 47.959722, 47.837222, 47.775833, 49.0041, 49.03, 48.987222), 
+  Long = c(-119.001597, -119.017406, -119.3075, -117.916667, -115.314, -119.632, -116.99972, -117.771944, -115.733889, -117.839722, -117.546111, -117.6116, -117.5037, -117.3475)) %>%
   st_as_sf(coords = c("Long", "Lat")) %>% 
   rename(geo_col = geometry) %>%
   as_tibble() %>% 
   st_as_sf(sf_column_name = "geo_col", crs = 4326)
 
-tiff("GCD_CR_gauges.tiff", units = "in", width = 8, height = 6, res = 300)
+tiff("GCD_CR_gauges.tiff", units = "in", width = 6, height = 4, res = 300)
 # plot
 ggplot() +
   geom_sf(
@@ -93,7 +93,7 @@ ggplot() +
     alpha = 0.8
   ) +
   geom_sf_label(
-    data = dams[3:8,],
+    data = dams[c(3, 5:8, 10, 11, 13),],
     aes(label = Name),
     size = 1.5,
     nudge_y = 0.08,
@@ -114,11 +114,33 @@ ggplot() +
     alpha = 0.8
   ) +
   geom_sf_label(
+    data = dams[4,],
+    aes(label = Name),
+    size = 1.5,
+    nudge_x = -0.15,
+    alpha = 0.8
+  ) +
+  geom_sf_label(
     data = dams[9,],
     aes(label = Name),
     size = 1.5,
     nudge_x = -0.28,
     nudge_y = 0.02,
+    alpha = 0.8
+  ) +
+  geom_sf_label(
+    data = dams[12,],
+    aes(label = Name),
+    size = 1.5,
+    nudge_x = -0.15,
+    nudge_y = -0.02,
+    alpha = 0.8
+  ) +
+  geom_sf_label(
+    data = dams[14,],
+    aes(label = Name),
+    size = 1.5,
+    nudge_x = 0.15,
     alpha = 0.8
   ) +
   geom_sf_label(
